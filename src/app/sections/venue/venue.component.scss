@@ -129,10 +129,61 @@
   }
 }
 
+// Responsive amélioré
+@media (max-width: 1024px) {
+  .venue-grid { 
+    gap: 3rem; 
+  }
+  
+  .venue-info-item {
+    gap: 0.8rem;
+    
+    .info-icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .venue-grid { 
     grid-template-columns: 1fr; 
     gap: 2.5rem; 
+  }
+  
+  .venue-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  
+  .venue-infos {
+    gap: 1.2rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .venue-info-item {
+    padding: 0.8rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 6px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: all 0.3s var(--ease-smooth);
+    
+    &:hover {
+      background: rgba(212, 175, 55, 0.05);
+      border-color: rgba(212, 175, 55, 0.2);
+    }
+    
+    .info-icon {
+      font-size: 1.1rem;
+    }
+    
+    .info-label {
+      font-size: 0.65rem;
+    }
+    
+    .info-value {
+      font-size: 0.9rem;
+    }
   }
   
   .map-visual {
@@ -149,5 +200,90 @@
       width: 100%;
       justify-self: center;
     }
+  }
+}
+
+@media (max-width: 640px) {
+  .venue-infos {
+    gap: 1rem;
+  }
+  
+  .venue-info-item {
+    padding: 0.6rem;
+    gap: 0.8rem;
+    
+    .info-icon {
+      font-size: 1rem;
+    }
+    
+    .info-label {
+      font-size: 0.6rem;
+    }
+    
+    .info-value {
+      font-size: 0.85rem;
+    }
+  }
+  
+  .map-visual {
+    height: 220px;
+  }
+  
+  .map-footer {
+    padding: 0.8rem 1.2rem;
+    
+    span {
+      font-size: 0.8rem;
+    }
+    
+    .map-btn {
+      font-size: 0.7rem;
+      padding: 0.4rem 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .venue-infos {
+    max-width: none;
+  }
+  
+  .venue-info-item {
+    padding: 0.5rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.6rem;
+    
+    .info-icon {
+      font-size: 1.4rem;
+      margin-top: 0;
+    }
+    
+    div {
+      align-items: center;
+      text-align: center;
+    }
+  }
+  
+  .map-visual {
+    height: 200px;
+  }
+  
+  .map-footer {
+    padding: 0.6rem 1rem;
+    gap: 0.8rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .venue-info-item {
+    .info-value {
+      font-size: 0.8rem;
+    }
+  }
+  
+  .map-visual {
+    height: 180px;
   }
 }

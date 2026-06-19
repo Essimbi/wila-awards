@@ -1,24 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cookie-banner',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <div class="cookie-banner" *ngIf="showBanner">
       <div class="cookie-content">
         <div class="cookie-text">
           <h3 class="cookie-title">Respect de votre vie privée</h3>
           <p class="cookie-description">
-            Nous utilisons des cookies et collectons des données personnelles pour améliorer votre expérience, 
-            analyser notre trafic et personnaliser le contenu. En continuant à naviguer, vous acceptez notre 
+            Conformément aux lois camerounaises sur la protection des données personnelles, nous utilisons des cookies 
+            et collectons des données personnelles pour améliorer votre expérience et gérer vos réservations. 
+            En continuant à naviguer, vous acceptez notre 
             <a href="#" (click)="openPrivacyModal()" class="privacy-link">Politique de Confidentialité</a>.
           </p>
           <p class="cookie-details">
-            <strong>Données collectées :</strong> Email, nom, téléphone (uniquement lors de réservations).<br>
-            <strong>Finalité :</strong> Gestion des réservations WILA Awards 2026.<br>
-            <strong>Durée :</strong> Conservation jusqu'à fin 2027, suppression sur demande.
+            <strong>Données collectées :</strong> Nom, prénom, email, téléphone (pour réservations uniquement).<br>
+            <strong>Finalité :</strong> Gestion des réservations WILA Awards 2026 et communications liées.<br>
+            <strong>Durée :</strong> Conservation 3 ans après l'événement, effacement sur demande.<br>
+            <strong>Vos droits :</strong> Accès, rectification, suppression selon la loi camerounaise.
           </p>
         </div>
         <div class="cookie-actions">
@@ -45,61 +48,87 @@ import { CommonModule } from '@angular/common';
         <div class="privacy-modal-body">
           <h3>1. Responsable du traitement</h3>
           <p><strong>WILA Cameroun</strong><br>
-          Email : contact@wila-awards.com<br>
+          Siège social : Douala, Cameroun<br>
+          Email : contact&#64;wila-awards.com<br>
           Dans le cadre de l'organisation des WILA Awards 2026.</p>
 
           <h3>2. Données collectées</h3>
+          <p>Conformément à la loi n° 2010/012 du 21 décembre 2010 sur la cybersécurité et la cybercriminalité 
+          et à la loi n° 2010/013 du 21 décembre 2010 régissant les communications électroniques au Cameroun :</p>
           <ul>
-            <li><strong>Données d'identification :</strong> Nom, prénom, email, téléphone</li>
-            <li><strong>Données professionnelles :</strong> Organisation, poste</li>
-            <li><strong>Données techniques :</strong> Adresse IP, cookies analytiques</li>
-            <li><strong>Données de réservation :</strong> Nombre de places, montant, code de paiement</li>
+            <li><strong>Données d'identification :</strong> Nom, prénom, adresse email, numéro de téléphone</li>
+            <li><strong>Données professionnelles :</strong> Organisation d'appartenance, poste occupé</li>
+            <li><strong>Données de réservation :</strong> Nombre de places, montant, informations de paiement</li>
+            <li><strong>Données techniques :</strong> Adresse IP, cookies de navigation, journaux d'accès</li>
           </ul>
 
           <h3>3. Finalités du traitement</h3>
           <ul>
-            <li>Gestion des réservations pour l'événement du 3 juillet 2026</li>
-            <li>Communication événementielle et suivi des paiements</li>
-            <li>Amélioration de l'expérience utilisateur du site web</li>
-            <li>Respect des obligations légales et comptables</li>
+            <li><strong>Gestion des réservations :</strong> Traitement des inscriptions pour l'événement du 3 juillet 2026</li>
+            <li><strong>Communication événementielle :</strong> Envoi d'informations relatives à l'événement</li>
+            <li><strong>Suivi administratif :</strong> Gestion des paiements et émission des billets</li>
+            <li><strong>Obligations légales :</strong> Respect des obligations comptables et fiscales camerounaises</li>
+            <li><strong>Amélioration des services :</strong> Optimisation de l'expérience utilisateur</li>
           </ul>
 
           <h3>4. Base légale</h3>
-          <p>Consentement libre et éclairé pour les réservations et communications marketing.</p>
+          <p>Le traitement est fondé sur votre <strong>consentement libre et éclairé</strong> pour les réservations 
+          et les communications marketing, conformément aux dispositions de la loi camerounaise sur les données personnelles.</p>
 
           <h3>5. Durée de conservation</h3>
+          <p>En conformité avec les obligations légales camerounaises :</p>
           <ul>
-            <li><strong>Données de réservation :</strong> Jusqu'au 31 décembre 2027</li>
-            <li><strong>Cookies analytiques :</strong> 13 mois maximum</li>
-            <li><strong>Logs techniques :</strong> 12 mois maximum</li>
+            <li><strong>Données de réservation :</strong> 3 ans après la fin de l'événement (31 décembre 2029)</li>
+            <li><strong>Données comptables :</strong> 10 ans conformément au droit comptable camerounais</li>
+            <li><strong>Cookies et logs :</strong> 12 mois maximum</li>
+            <li><strong>Communications marketing :</strong> Jusqu'à retrait du consentement</li>
           </ul>
 
-          <h3>6. Vos droits RGPD</h3>
+          <h3>6. Vos droits sur vos données</h3>
+          <p>Conformément à la législation camerounaise en vigueur, vous disposez des droits suivants :</p>
           <ul>
-            <li><strong>Droit d'accès :</strong> Consulter vos données</li>
-            <li><strong>Droit de rectification :</strong> Corriger vos données</li>
-            <li><strong>Droit à l'effacement :</strong> Supprimer vos données</li>
-            <li><strong>Droit d'opposition :</strong> Vous opposer au traitement</li>
-            <li><strong>Droit à la portabilité :</strong> Récupérer vos données</li>
+            <li><strong>Droit d'accès :</strong> Obtenir une copie de vos données personnelles</li>
+            <li><strong>Droit de rectification :</strong> Corriger des données inexactes ou incomplètes</li>
+            <li><strong>Droit de suppression :</strong> Demander l'effacement de vos données</li>
+            <li><strong>Droit d'opposition :</strong> Vous opposer au traitement de vos données</li>
+            <li><strong>Droit de limitation :</strong> Limiter le traitement dans certains cas</li>
+            <li><strong>Droit à la portabilité :</strong> Récupérer vos données dans un format utilisable</li>
           </ul>
-          <p>Pour exercer vos droits : <strong>contact@wila-awards.com</strong></p>
+          <p><strong>Comment exercer vos droits :</strong> Envoyez votre demande à <strong>contact&#64;wila-awards.com</strong> 
+          avec une pièce d'identité. Réponse garantie sous 30 jours.</p>
 
-          <h3>7. Sécurité des données</h3>
+          <h3>7. Sécurité et confidentialité</h3>
+          <p>Nous mettons en œuvre des mesures techniques et organisationnelles appropriées :</p>
           <ul>
-            <li>Stockage sécurisé via Google Sheets (chiffrement HTTPS)</li>
-            <li>Accès restreint aux organisateurs authentifiés</li>
-            <li>Sauvegarde automatique et restauration possible</li>
-            <li>Audit régulier des accès aux données</li>
+            <li><strong>Chiffrement :</strong> Transmission sécurisée par protocole HTTPS</li>
+            <li><strong>Accès restreint :</strong> Limitation aux seuls organisateurs autorisés</li>
+            <li><strong>Sauvegarde :</strong> Copies de sécurité régulières et restauration</li>
+            <li><strong>Audit :</strong> Surveillance des accès et des modifications</li>
+            <li><strong>Formation :</strong> Sensibilisation du personnel aux enjeux de confidentialité</li>
           </ul>
 
-          <h3>8. Transferts internationaux</h3>
-          <p>Les données peuvent être traitées par Google (États-Unis) dans le cadre de Google Sheets, 
-          sous couvert des clauses contractuelles types de la Commission européenne.</p>
+          <h3>8. Transferts de données</h3>
+          <p>Les données peuvent être hébergées et traitées par Google (États-Unis) via Google Sheets. 
+          Ce transfert s'effectue dans le respect des garanties appropriées et des accords de transfert 
+          internationaux reconnus par les autorités camerounaises.</p>
 
-          <h3>9. Contact DPO</h3>
-          <p>Pour toute question relative à la protection de vos données :<br>
-          <strong>Email :</strong> dpo@wila-awards.com<br>
-          <strong>Autorité de contrôle :</strong> CNIL (France) ou autorité locale compétente</p>
+          <h3>9. Cookies et technologies similaires</h3>
+          <p>Notre site utilise des cookies pour améliorer votre expérience. Vous pouvez gérer vos préférences 
+          via le bandeau de cookies. Les cookies essentiels ne peuvent être désactivés car nécessaires au fonctionnement.</p>
+
+          <h3>10. Contact et réclamations</h3>
+          <p><strong>Délégué à la Protection des Données :</strong><br>
+          Email : dpo&#64;wila-awards.com<br>
+          Courrier : WILA Cameroun, Douala</p>
+          
+          <p><strong>Autorité de contrôle compétente :</strong><br>
+          Agence Nationale des Technologies de l'Information et de la Communication (ANTIC)<br>
+          Adresse : Yaoundé, Cameroun<br>
+          En cas de litige non résolu, vous pouvez saisir cette autorité.</p>
+
+          <h3>11. Modifications</h3>
+          <p>Cette politique peut être modifiée. La version en vigueur est datée du <strong>19 juin 2026</strong>. 
+          Toute modification substantielle vous sera notifiée par email.</p>
         </div>
         <div class="privacy-modal-footer">
           <button class="btn-primary" (click)="closePrivacyModal()">J'ai compris</button>

@@ -39,6 +39,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
       .to('.hero-subtitle',  { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, ease: 'power3.out' }, '-=0.7')
       .to('.hero-meta',      { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.9, ease: 'power3.out' }, '-=0.6')
       .to('.hero-cta',       { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.9, ease: 'back.out(1.7)' }, '-=0.5')
+      .to('.hero-right',     { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 1, ease: 'power3.out' }, '-=0.5')
       .to('.hero-scroll-hint', { opacity: 1, duration: 0.8 }, '-=0.3');
   }
 

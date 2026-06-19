@@ -368,14 +368,499 @@
   &:hover { color: var(--gold-light); }
 }
 
+// ─── Responsive amélioré ─────────────────────────────────────
+@media (max-width: 1200px) {
+  .resa-layout {
+    grid-template-columns: 1fr 320px;
+    gap: 2.5rem;
+  }
+}
+
 @media (max-width: 1024px) {
   .resa-layout {
     grid-template-columns: 1fr;
-    .resa-sidebar { order: -1; }
+    gap: 2rem;
+    
+    .resa-sidebar { 
+      order: -1; 
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+  }
+  
+  .sidebar-card {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .resa-section {
+    padding: calc(var(--section-pad) * 0.8) 0;
+  }
+  
+  .resa-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    max-width: none;
+  }
+  
+  .resa-form-wrap {
+    padding: 2rem 1.5rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+    
+    label {
+      font-size: 0.7rem;
+    }
+    
+    input {
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+  
+  .places-selector {
+    margin: 0 auto;
+  }
+  
+  .form-summary {
+    margin: 1.2rem 0;
+    padding: 1rem;
+  }
+  
+  .summary-row {
+    font-size: 0.85rem;
+    
+    &.note-row {
+      font-size: 0.75rem;
+    }
+  }
+  
+  .summary-total {
+    font-size: 1rem;
+  }
+  
+  .btn-submit {
+    padding: 1.1rem;
+    font-size: 0.95rem;
+  }
+  
+  .resa-sidebar {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar-card {
+    padding: 1.2rem;
+    
+    h4 {
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    ul li,
+    p {
+      font-size: 0.8rem;
+    }
+  }
+  
+  .sidebar-link {
+    font-size: 0.8rem;
+    padding: 0.4rem 0;
   }
 }
 
 @media (max-width: 640px) {
-  .form-row { grid-template-columns: 1fr; }
-  .resa-form-wrap { padding: 1.5rem; }
+  .resa-form-wrap {
+    padding: 1.5rem 1rem;
+  }
+  
+  .places-group {
+    text-align: center;
+    
+    label {
+      text-align: center;
+    }
+  }
+  
+  .places-selector {
+    justify-content: center;
+  }
+  
+  .places-note {
+    text-align: center;
+    font-size: 0.7rem;
+  }
+  
+  .form-summary {
+    padding: 0.8rem;
+  }
+  
+  // Success step amélioré pour mobile
+  .success-header {
+    margin-bottom: 1.5rem;
+    
+    .success-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 0.8rem;
+    }
+    
+    h3 {
+      font-size: 1.2rem;
+    }
+    
+    p {
+      font-size: 0.85rem;
+    }
+  }
+  
+  .payment-step-item {
+    gap: 0.8rem;
+    
+    .ps-num {
+      width: 26px;
+      height: 26px;
+      font-size: 0.75rem;
+    }
+    
+    strong {
+      font-size: 0.9rem;
+    }
+    
+    p {
+      font-size: 0.82rem;
+    }
+  }
+  
+  .ussd-code-block {
+    margin-left: 2rem;
+    padding: 1.2rem;
+    
+    .ussd-code {
+      font-size: clamp(0.9rem, 3vw, 1.1rem);
+      margin-bottom: 0.6rem;
+    }
+    
+    .ussd-meta {
+      font-size: 0.75rem;
+    }
+  }
+  
+  .btn-copy {
+    font-size: 0.75rem;
+    padding: 0.4rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .resa-form-wrap {
+    padding: 1.2rem 0.8rem;
+  }
+  
+  .form-group {
+    input {
+      padding: 0.7rem 0.8rem;
+      font-size: 0.85rem;
+    }
+  }
+  
+  .places-selector {
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .place-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+  }
+  
+  .places-count {
+    min-width: 45px;
+    font-size: 1.1rem;
+  }
+  
+  .btn-submit {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .sidebar-card {
+    padding: 1rem;
+  }
+  
+  .payment-step-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.6rem;
+    
+    .ps-num {
+      margin-top: 0;
+    }
+  }
+  
+  .ussd-code-block {
+    margin-left: 0;
+    margin-top: 1rem;
+    padding: 1rem;
+    
+    .ussd-label {
+      font-size: 0.6rem;
+    }
+    
+    .ussd-code {
+      font-size: 0.9rem;
+      word-break: break-all;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .resa-form-wrap {
+    padding: 1rem 0.6rem;
+  }
+  
+  .form-summary {
+    padding: 0.6rem;
+  }
+  
+  .summary-row {
+    font-size: 0.8rem;
+  }
+  
+  .sidebar-card {
+    padding: 0.8rem;
+    
+    h4 {
+      font-size: 0.85rem;
+    }
+    
+    ul li,
+    p {
+      font-size: 0.75rem;
+    }
+  }
+  
+  .ussd-code-block {
+    padding: 0.8rem;
+    
+    .ussd-code {
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// Améliorations pour les clauses RGPD sur mobile
+@media (max-width: 768px) {
+  .consent-section {
+    margin: 1.5rem 0;
+    padding: 1.2rem;
+    
+    .consent-title {
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    .consent-item {
+      margin-bottom: 1rem;
+    }
+    
+    .consent-checkbox {
+      gap: 0.6rem;
+      
+      .checkbox-custom {
+        width: 16px;
+        height: 16px;
+        margin-top: 1px;
+      }
+      
+      .consent-text {
+        font-size: 0.8rem;
+        
+        strong {
+          font-size: 0.85rem;
+        }
+        
+        small {
+          font-size: 0.75rem;
+        }
+      }
+    }
+    
+    .rgpd-info {
+      padding-top: 0.8rem;
+      
+      p {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .consent-section {
+    padding: 1rem;
+    
+    .consent-checkbox {
+      .consent-text {
+        font-size: 0.75rem;
+        
+        small {
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
+}
+
+// ─── Clauses de consentement RGPD ───────────────────────────
+.consent-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: 6px;
+  background: rgba(212, 175, 55, 0.02);
+
+  .consent-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ivory);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &::before {
+      content: '🔒';
+      font-size: 0.9rem;
+    }
+  }
+
+  .consent-item {
+    margin-bottom: 1.2rem;
+
+    &.invalid {
+      .consent-text {
+        color: var(--crimson);
+      }
+      
+      .checkbox-custom {
+        border-color: var(--crimson);
+      }
+    }
+
+    .err-msg {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--crimson);
+      margin-top: 0.5rem;
+      margin-left: 2rem;
+    }
+  }
+
+  .consent-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    cursor: pointer;
+    line-height: 1.4;
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    .checkbox-custom {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--ivory-dim);
+      border-radius: 3px;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s var(--ease-smooth);
+      margin-top: 2px;
+
+      &::after {
+        content: '✓';
+        color: var(--midnight-deep);
+        font-size: 12px;
+        font-weight: bold;
+        opacity: 0;
+        transform: scale(0.5);
+        transition: all 0.2s var(--ease-smooth);
+      }
+    }
+
+    input:checked + .checkbox-custom {
+      background: var(--gold);
+      border-color: var(--gold);
+
+      &::after {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .consent-text {
+      font-size: 0.85rem;
+      color: var(--ivory-dim);
+      line-height: 1.5;
+
+      strong {
+        color: var(--ivory);
+      }
+
+      small {
+        font-size: 0.8rem;
+        opacity: 0.8;
+        display: block;
+        margin-top: 0.3rem;
+      }
+
+      em {
+        color: var(--gold);
+        font-style: normal;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .rgpd-info {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+    p {
+      font-size: 0.75rem;
+      color: var(--ivory-dim);
+      line-height: 1.4;
+      margin: 0;
+
+      strong {
+        color: var(--ivory);
+      }
+
+      a {
+        color: var(--gold);
+        text-decoration: none;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
 }

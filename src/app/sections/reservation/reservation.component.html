@@ -40,7 +40,7 @@
             <div class="form-row">
               <div class="form-group" [class.invalid]="isInvalid('email')">
                 <label for="email">Email *</label>
-                <input id="email" type="email" formControlName="email" placeholder="votre@email.com">
+                <input id="email" type="email" formControlName="email" placeholder="votre&#64;email.com">
                 <span class="err-msg" *ngIf="isInvalid('email')">Email invalide</span>
               </div>
               <div class="form-group" [class.invalid]="isInvalid('telephone')">
@@ -82,6 +82,41 @@
               </div>
               <div class="summary-row note-row">
                 <span>Paiement hors-site via Mobile Money (MTN/Orange)</span>
+              </div>
+            </div>
+
+            <!-- Clauses de consentement RGPD -->
+            <div class="consent-section">
+              <h4 class="consent-title">Protection des données personnelles</h4>
+              
+              <div class="consent-item" [class.invalid]="isInvalid('consentementRgpd')">
+                <label class="consent-checkbox">
+                  <input type="checkbox" formControlName="consentementRgpd" required>
+                  <span class="checkbox-custom"></span>
+                  <span class="consent-text">
+                    <strong>J'accepte la collecte et le traitement de mes données personnelles *</strong><br>
+                    <small>Conformément aux lois camerounaises sur la protection des données, WILA Cameroun collectera 
+                    vos informations (nom, email, téléphone) pour gérer votre réservation et vous contacter concernant 
+                    l'événement. Conservation : 3 ans après l'événement (fin 2029).</small>
+                  </span>
+                </label>
+                <span class="err-msg" *ngIf="isInvalid('consentementRgpd')">Consentement obligatoire</span>
+              </div>
+
+              <div class="consent-item">
+                <label class="consent-checkbox">
+                  <input type="checkbox" formControlName="consentementMarketing">
+                  <span class="checkbox-custom"></span>
+                  <span class="consent-text">
+                    J'accepte de recevoir les communications sur les futurs événements WILA <em>(optionnel)</em>
+                  </span>
+                </label>
+              </div>
+
+              <div class="rgpd-info">
+                <p><strong>Vos droits selon la loi camerounaise :</strong> Accès, rectification, suppression de vos données. 
+                Contact : <a href="mailto:{{ contactEmail }}">{{ contactEmail }}</a><br>
+                <strong>Autorité de contrôle :</strong> ANTIC (Agence Nationale des Technologies de l'Information et de la Communication)</p>
               </div>
             </div>
 

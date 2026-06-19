@@ -752,29 +752,125 @@
   }
 }
 
-// ─── Responsive ─────────────────────────────────────────────
-@media (max-width: 1024px) {
+// ─── Responsive amélioré ────────────────────────────────────
+@media (max-width: 1200px) {
   .theme-header-content {
-    grid-template-columns: 1fr;
     gap: 3rem;
-    text-align: center;
+  }
+  
+  .theme-stats-grid {
+    gap: 1.8rem;
+  }
+  
+  .theme-pillars-grid {
+    gap: 1.8rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .theme-header {
+    .theme-header-content {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      text-align: center;
+    }
   }
   
   .theme-stats-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
   }
+  
+  .theme-pillars-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
   .theme-section {
     padding: calc(var(--section-pad) * 0.8) 0;
+    min-height: auto;
+  }
+  
+  .theme-header {
+    margin-bottom: 4rem;
   }
   
   .theme-badge-year {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.3rem;
     text-align: center;
+    padding: 0.6rem 1.2rem;
+    margin-bottom: 1.5rem;
+    
+    .year-number {
+      font-size: 1.5rem;
+    }
+    
+    .year-label {
+      font-size: 0.8rem;
+    }
+  }
+  
+  .theme-title {
+    margin-bottom: 1rem;
+    
+    .title-line {
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+  }
+  
+  .theme-subtitle p {
+    font-size: 1.1rem;
+  }
+  
+  .theme-cta {
+    margin-top: 2rem;
+    
+    .theme-btn {
+      padding: 1rem 2rem;
+      font-size: 0.9rem;
+    }
+  }
+  
+  .theme-visual-frame {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  .theme-stats-section {
+    margin-bottom: 6rem;
+    
+    .stats-title {
+      font-size: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+  }
+  
+  .theme-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    
+    .stat-content {
+      .stat-number {
+        font-size: 2rem;
+      }
+      
+      .stat-label {
+        font-size: 0.9rem;
+      }
+      
+      .stat-desc {
+        font-size: 0.8rem;
+      }
+    }
   }
   
   .theme-pillars-grid {
@@ -782,10 +878,186 @@
     gap: 1.5rem;
   }
   
+  .theme-pillar {
+    padding: 2rem 1.5rem;
+    
+    .pillar-content {
+      .pillar-title {
+        font-size: 1.2rem;
+      }
+      
+      .pillar-desc {
+        font-size: 0.9rem;
+      }
+    }
+    
+    .pillar-number {
+      font-size: 2.5rem;
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .theme-section {
+    padding: calc(var(--section-pad) * 0.7) 0;
+  }
+  
+  .theme-header {
+    margin-bottom: 3rem;
+  }
+  
+  .theme-badge-year {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    
+    .year-number {
+      font-size: 1.3rem;
+    }
+  }
+  
+  .theme-title .title-line {
+    font-size: clamp(1.5rem, 7vw, 2.2rem);
+    line-height: 1.15;
+  }
+  
+  .theme-subtitle p {
+    font-size: 1rem;
+  }
+  
+  .theme-cta .theme-btn {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  
+  .theme-stats-section .stats-title {
+    font-size: 1.6rem;
+  }
+  
   .stat-card {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
+    padding: 1.2rem;
+    
+    .stat-icon {
+      width: 50px;
+      height: 50px;
+      
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    
+    .stat-content {
+      .stat-number {
+        font-size: 1.8rem;
+      }
+    }
+  }
+  
+  .theme-pillar {
+    padding: 1.5rem;
+    
+    .pillar-icon-wrapper {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1.2rem;
+      
+      .pillar-icon svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+    
+    .pillar-number {
+      font-size: 2rem;
+    }
+  }
+  
+  .pillars-header {
+    margin-bottom: 3rem;
+    
+    .pillars-title {
+      font-size: 2rem;
+    }
+    
+    .pillars-subtitle {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-badge-year {
+    padding: 0.4rem 0.8rem;
+    gap: 0.2rem;
+    
+    .year-number {
+      font-size: 1.2rem;
+    }
+    
+    .year-label {
+      font-size: 0.7rem;
+    }
+  }
+  
+  .theme-title .title-line {
+    font-size: clamp(1.3rem, 8vw, 1.8rem);
+  }
+  
+  .theme-cta .theme-btn {
+    padding: 0.9rem 1.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .stat-card {
+    padding: 1rem;
+    
+    .stat-icon {
+      width: 45px;
+      height: 45px;
+      
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+  
+  .theme-pillar {
+    padding: 1.2rem;
+    
+    .pillar-icon-wrapper {
+      width: 55px;
+      height: 55px;
+      
+      .pillar-icon svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    
+    .pillar-number {
+      font-size: 1.8rem;
+      top: 1.2rem;
+      right: 1.2rem;
+    }
+  }
+}
+
+// Améliorations pour très petits écrans
+@media (max-width: 360px) {
+  .theme-visual-frame {
+    padding: 1rem;
+  }
+  
+  .stat-card {
+    padding: 0.8rem;
+  }
+  
+  .theme-pillar {
+    padding: 1rem;
   }
 }
 

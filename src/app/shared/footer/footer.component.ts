@@ -68,6 +68,21 @@ import { CommonModule } from '@angular/common';
   p { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
   .footer-org { color: rgba(212,175,55,0.4); }
 }
+
+@media (max-width: 768px) {
+  .footer-inner { padding: 2.5rem 0 1.5rem; gap: 1.5rem; }
+  .footer-links { gap: 1rem; }
+  .footer-bottom { flex-direction: column; align-items: center; text-align: center; gap: 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  .footer-inner { padding: 2rem 0 1rem; }
+  .footer-brand {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    .footer-logo { max-width: 200px; height: 40px; }
+  }
+  .footer-links { justify-content: center; a { font-size: 0.75rem; } }
+}
   `]
 })
 export class FooterComponent {

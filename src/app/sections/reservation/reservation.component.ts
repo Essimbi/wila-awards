@@ -43,6 +43,8 @@ export class ReservationComponent implements AfterViewInit, OnInit, OnDestroy {
       organisation: ['', Validators.required],
       poste:        [''],
       nombrePlaces: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
+      consentementRgpd: [false, Validators.requiredTrue],
+      consentementMarketing: [false]
     });
   }
 

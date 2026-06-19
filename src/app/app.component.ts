@@ -10,6 +10,7 @@ import { SponsorsComponent } from './sections/sponsors/sponsors.component';
 import { VenueComponent } from './sections/venue/venue.component';
 import { ReservationComponent } from './sections/reservation/reservation.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { CookieBannerComponent } from './shared/cookie-banner/cookie-banner.component';
 import Lenis from 'lenis';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -20,7 +21,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
   imports: [
     CommonModule, NavbarComponent, HeroComponent, ThemeComponent,
     AboutComponent, ProgrammeComponent, JuryComponent, SponsorsComponent,
-    VenueComponent, ReservationComponent, FooterComponent,
+    VenueComponent, ReservationComponent, FooterComponent, CookieBannerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
