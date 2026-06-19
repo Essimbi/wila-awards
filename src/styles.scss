@@ -1,0 +1,305 @@
+// ============================================================
+// WILA AWARDS 2026 — Design System Global
+// ============================================================
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400&display=swap');
+
+// ─── Tokens ──────────────────────────────────────────────────
+:root {
+  --midnight:       #0A1628;
+  --midnight-deep:  #050B14;
+  --midnight-mid:   #0F1F3D;
+  --gold:           #D4AF37;
+  --gold-light:     #F2D680;
+  --gold-dim:       #8A6F1A;
+  --crimson:        #B91C2E;
+  --crimson-light:  #E8273C;
+  --ivory:          #F7F4ED;
+  --ivory-dim:      #C8C4BA;
+  --white:          #FFFFFF;
+
+  --font-display:   'Fraunces', Georgia, serif;
+  --font-body:      'Inter', system-ui, sans-serif;
+  --font-script:    'Playfair Display', Georgia, serif;
+
+  --ease-smooth:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-bounce:    cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-expo:   cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  --ease-out-expo:  cubic-bezier(0.19, 1, 0.22, 1);
+
+  --section-pad:    clamp(80px, 10vw, 160px);
+  --container:      min(1200px, 92vw);
+}
+
+// ─── Reset ───────────────────────────────────────────────────
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: auto; // lenis prend le contrôle
+  overflow-x: hidden;
+  background: var(--midnight-deep);
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--midnight-deep);
+  color: var(--ivory);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+// lenis smooth scroll
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+// ─── Utilitaires globaux ─────────────────────────────────────
+.container {
+  width: var(--container);
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  font-family: var(--font-script);
+  font-style: italic;
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  color: var(--ivory);
+}
+
+.section-title span.accent {
+  color: var(--gold);
+}
+
+.section-body {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  color: var(--ivory-dim);
+  line-height: 1.8;
+  max-width: 60ch;
+}
+
+// ─── Boutons ─────────────────────────────────────────────────
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2.2rem;
+  background: var(--gold);
+  color: var(--midnight-deep);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s var(--ease-smooth), transform 0.25s var(--ease-bounce), box-shadow 0.3s;
+
+  &:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.35);
+  }
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s var(--ease-smooth);
+
+  &:hover {
+    background: rgba(212, 175, 55, 0.1);
+    transform: translateY(-2px);
+  }
+}
+
+// ─── Séparateur doré ─────────────────────────────────────────
+.gold-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  margin: 1.5rem 0;
+}
+
+// ─── Animations initiales (GSAP cibles) ──────────────────────
+.reveal-up {
+  opacity: 0;
+  transform: translateY(60px);
+}
+.reveal-fade {
+  opacity: 0;
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.88);
+}
+.reveal-rotate {
+  opacity: 0;
+  transform: rotate(-10deg);
+}
+.reveal-blur {
+  opacity: 0;
+  filter: blur(10px);
+}
+.reveal-skew {
+  opacity: 0;
+  transform: skewX(-5deg);
+}
+
+// ─── Scroll hint ─────────────────────────────────────────────
+.scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.5;
+  animation: scrollBounce 2s ease-in-out infinite;
+
+  span {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ivory-dim);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollLineGrow 2s ease-in-out infinite;
+  }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+@keyframes scrollLineGrow {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+// ─── Particles / Grain overlay ───────────────────────────────
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+}
+
+// ─── Responsive ──────────────────────────────────────────────
+@media (max-width: 768px) {
+  :root {
+    --section-pad: clamp(60px, 8vw, 80px);
+  }
+}
+
+// ─── Reduced motion ──────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up, .reveal-fade, .reveal-left, .reveal-right, .reveal-scale,
+  .reveal-rotate, .reveal-blur, .reveal-skew {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .scroll-hint { animation: none; }
+  .scroll-line { animation: none; }
+}
+
+// ─── Effets de glow premium ───────────────────────────────────
+.glow-gold {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.3),
+              0 0 60px rgba(212, 175, 55, 0.1),
+              0 0 90px rgba(212, 175, 55, 0.05);
+}
+
+.glow-crimson {
+  box-shadow: 0 0 30px rgba(185, 28, 46, 0.3),
+              0 0 60px rgba(185, 28, 46, 0.1),
+              0 0 90px rgba(185, 28, 46, 0.05);
+}
+
+// ─── Glassmorphism ───────────────────────────────────────────
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-dark {
+  background: rgba(5, 11, 20, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+// ─── Gradients animés ───────────────────────────────────────
+.gradient-animated {
+  background: linear-gradient(135deg, var(--gold), var(--crimson), var(--gold));
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// ─── Magnetic effect (pour les boutons) ───────────────────────
+.magnetic {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// ─── Text gradient ───────────────────────────────────────────
+.text-gradient {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

@@ -1,0 +1,33 @@
+<section class="programme-section" id="programme">
+  <div class="prog-bg" aria-hidden="true">
+    <svg viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,0 600,0 600,200 0,400" fill="rgba(212,175,55,0.02)"/>
+    </svg>
+  </div>
+
+  <div class="container">
+    <div class="prog-header">
+      <span class="section-eyebrow reveal-fade">Vendredi 03 Juillet 2026</span>
+      <h2 class="section-title reveal-up">Programme <span class="accent">de la Soirée</span></h2>
+      <div class="gold-divider reveal-fade"></div>
+      <p class="section-body reveal-up">
+        Une soirée d'exception conçue pour honorer, inspirer et connecter les femmes leaders
+        de la supply chain africaine. De 18h00 à 23h00 à l'Hôtel Platinum Cocotiers.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-line" aria-hidden="true"></div>
+      <div class="prog-item" *ngFor="let item of timeline; let i = index">
+        <div class="prog-time">
+          <span>{{ item.time }}</span>
+        </div>
+        <div class="prog-dot" [innerHTML]="getIconSvg(item.icon)"></div>
+        <div class="prog-content">
+          <h3 class="prog-title">{{ item.title }}</h3>
+          <p class="prog-desc">{{ item.desc }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

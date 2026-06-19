@@ -1,0 +1,143 @@
+<section class="hero" id="hero">
+  <!-- Particles canvas -->
+  <canvas #heroCanvas class="hero-particles"></canvas>
+
+  <!-- Image de fond hero -->
+  <div class="hero-bg-image" aria-hidden="true">
+    <img src="/assets/hero_section.png" alt="" loading="eager">
+  </div>
+
+  <!-- Fond géométrique SVG (overlay) -->
+  <div class="hero-bg-geometry" aria-hidden="true">
+    <svg class="geo-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cercle continent africain stylisé -->
+      <circle cx="1200" cy="200" r="320" fill="none" stroke="rgba(212,175,55,0.06)" stroke-width="1"/>
+      <circle cx="1200" cy="200" r="220" fill="none" stroke="rgba(212,175,55,0.04)" stroke-width="1"/>
+      <circle cx="1200" cy="200" r="120" fill="none" stroke="rgba(212,175,55,0.08)" stroke-width="1"/>
+      <!-- Lignes supply chain (flux logistique) -->
+      <line x1="0" y1="600" x2="400" y2="350" stroke="rgba(212,175,55,0.07)" stroke-width="1"/>
+      <line x1="400" y1="350" x2="800" y2="250" stroke="rgba(212,175,55,0.07)" stroke-width="1"/>
+      <line x1="800" y1="250" x2="1200" y2="200" stroke="rgba(212,175,55,0.07)" stroke-width="1"/>
+      <!-- Losanges décoratifs -->
+      <polygon points="720,60 740,80 720,100 700,80" fill="none" stroke="rgba(212,175,55,0.15)" stroke-width="1"/>
+      <polygon points="200,400 215,415 200,430 185,415" fill="none" stroke="rgba(185,28,46,0.2)" stroke-width="1"/>
+      <!-- Ruban signature -->
+      <path d="M-50 700 Q400 550 900 620 Q1200 660 1500 500" fill="none" stroke="rgba(185,28,46,0.12)" stroke-width="60"/>
+      <path d="M-50 700 Q400 550 900 620 Q1200 660 1500 500" fill="none" stroke="rgba(212,175,55,0.08)" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <!-- Contenu principal -->
+  <div class="hero-content container">
+    <div class="hero-left">
+      <span class="hero-eyebrow reveal-text">1ère Édition · Juillet 2026</span>
+
+      <h1 class="hero-title reveal-text">
+        <span class="title-wila">WILA</span>
+        <span class="title-awards">AWARDS</span>
+      </h1>
+
+      <div class="hero-subtitle reveal-text">
+        <span class="subtitle-theme">Femmes Leaders</span>
+        <span class="subtitle-chain">dans la Supply Chain Africaine</span>
+        <span class="subtitle-transfo">Transformation par l'Innovation</span>
+      </div>
+
+      <div class="hero-meta reveal-text">
+        <div class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Vendredi 03 Juillet 2026 · 18h00 – 23h00</span>
+        </div>
+        <div class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Hôtel Platinum Cocotiers · Douala, Cameroun</span>
+        </div>
+      </div>
+
+      <div class="hero-cta reveal-text">
+        <button class="btn-primary" (click)="scrollToReservation()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+          Réserver ma place
+        </button>
+        <a href="#programme" class="btn-outline">
+          Voir le programme
+        </a>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="hero-right reveal-text">
+      <div class="countdown-card">
+        <p class="countdown-label">L'événement commence dans</p>
+        <div class="countdown-grid">
+          <div class="cd-unit">
+            <span class="cd-number" id="cd-days">00</span>
+            <span class="cd-name">Jours</span>
+          </div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit">
+            <span class="cd-number" id="cd-hours">00</span>
+            <span class="cd-name">Heures</span>
+          </div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit">
+            <span class="cd-number" id="cd-minutes">00</span>
+            <span class="cd-name">Min</span>
+          </div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit">
+            <span class="cd-number" id="cd-seconds">00</span>
+            <span class="cd-name">Sec</span>
+          </div>
+        </div>
+        <!-- Silhouette femme professionnelle SVG -->
+        <div class="cd-figure" aria-hidden="true">
+          <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="figGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:0.6"/>
+                <stop offset="100%" style="stop-color:#B91C2E;stop-opacity:0.3"/>
+              </linearGradient>
+              <linearGradient id="helmetGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:0.9"/>
+                <stop offset="100%" style="stop-color:#8A6F1A;stop-opacity:0.7"/>
+              </linearGradient>
+            </defs>
+            <!-- Casque de chantier -->
+            <ellipse cx="100" cy="52" rx="42" ry="8" fill="url(#helmetGrad)"/>
+            <path d="M58 52 Q58 20 100 18 Q142 20 142 52 Z" fill="url(#helmetGrad)"/>
+            <rect x="54" y="52" width="92" height="8" rx="4" fill="#8A6F1A" opacity="0.8"/>
+            <!-- Tête -->
+            <ellipse cx="100" cy="78" rx="22" ry="26" fill="url(#figGrad)"/>
+            <!-- Corps / veste -->
+            <path d="M68 104 Q78 100 100 100 Q122 100 132 104 L138 180 L62 180 Z" fill="url(#figGrad)"/>
+            <!-- Cravate / insigne -->
+            <polygon points="100,108 104,140 100,148 96,140" fill="#D4AF37" opacity="0.7"/>
+            <!-- Épaules / veste épaulettes -->
+            <path d="M68 104 L50 120 L58 126 L72 112" fill="url(#figGrad)" opacity="0.8"/>
+            <path d="M132 104 L150 120 L142 126 L128 112" fill="url(#figGrad)" opacity="0.8"/>
+            <!-- Tablier clipboard -->
+            <rect x="86" y="120" width="28" height="36" rx="2" fill="rgba(242,214,128,0.15)" stroke="#D4AF37" stroke-width="0.5"/>
+            <!-- Lignes bras -->
+            <line x1="58" y1="126" x2="44" y2="170" stroke="url(#figGrad)" stroke-width="12" stroke-linecap="round"/>
+            <line x1="142" y1="126" x2="156" y2="170" stroke="url(#figGrad)" stroke-width="12" stroke-linecap="round"/>
+            <!-- Jambes -->
+            <rect x="74" y="180" width="20" height="80" rx="6" fill="url(#figGrad)" opacity="0.7"/>
+            <rect x="106" y="180" width="20" height="80" rx="6" fill="url(#figGrad)" opacity="0.7"/>
+            <!-- Chaussures -->
+            <ellipse cx="84" cy="262" rx="16" ry="6" fill="#D4AF37" opacity="0.5"/>
+            <ellipse cx="116" cy="262" rx="16" ry="6" fill="#D4AF37" opacity="0.5"/>
+            <!-- Étoile award -->
+            <polygon points="100,30 102,36 108,36 103,40 105,46 100,42 95,46 97,40 92,36 98,36" fill="#D4AF37" opacity="0.9"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="hero-scroll-hint scroll-hint">
+    <span>Découvrir</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>

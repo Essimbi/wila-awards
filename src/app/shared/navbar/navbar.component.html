@@ -1,0 +1,22 @@
+<nav class="navbar" [class.scrolled]="scrolled">
+  <div class="navbar-inner container">
+    <a class="navbar-logo" (click)="scrollTo('hero')">
+      <img src="/logo_wila.png" alt="WILA Awards 2026" class="logo-image">
+    </a>
+
+    <ul class="navbar-links" [class.open]="menuOpen">
+      <li *ngFor="let link of navLinks">
+        <a [class.active]="activeSection === link.id" (click)="scrollTo(link.id)">
+          {{ link.label }}
+        </a>
+      </li>
+      <li class="cta-li">
+        <button class="btn-primary btn-sm" (click)="scrollTo('reservation')">Réserver</button>
+      </li>
+    </ul>
+
+    <button class="burger" [class.open]="menuOpen" (click)="menuOpen = !menuOpen" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>

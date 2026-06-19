@@ -1,0 +1,31 @@
+<section class="jury-section" id="jury">
+  <div class="container">
+    <div class="jury-header">
+      <span class="section-eyebrow reveal-fade">Catégories</span>
+      <h2 class="section-title reveal-up">Les Prix <span class="accent">WILA Awards</span></h2>
+      <div class="gold-divider reveal-fade"></div>
+      <p class="section-body reveal-up">
+        Six catégories pour honorer l'excellence sous toutes ses formes,
+        sélectionnées par un jury panafricain d'experts reconnus dans l'écosystème logistique.
+      </p>
+    </div>
+
+    <div class="categories-grid">
+      <div class="cat-card reveal-up" *ngFor="let cat of categories">
+        <div class="cat-icon" [innerHTML]="getIconSvg(cat.icon)"></div>
+        <div class="cat-content">
+          <h3 class="cat-label">{{ cat.label }}</h3>
+          <p class="cat-desc">{{ cat.desc }}</p>
+        </div>
+        <div class="cat-glow" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="jury-cta-block reveal-up">
+      <div class="jury-note">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p>Les nominations pour la 1ère édition sont fermées. Les lauréates seront annoncées lors de la cérémonie le 03 juillet 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>

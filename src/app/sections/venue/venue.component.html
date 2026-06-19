@@ -1,0 +1,52 @@
+<section class="venue-section" id="venue">
+  <div class="container">
+    <div class="venue-header">
+      <span class="section-eyebrow reveal-fade">Lieu de l'événement</span>
+      <h2 class="section-title reveal-up">Hôtel Platinum <span class="accent">Cocotiers</span></h2>
+      <div class="gold-divider reveal-fade"></div>
+      <p class="section-body reveal-up">
+        Un cadre d'exception au cœur de Douala pour accueillir cet événement historique,
+        au carrefour des grandes décisions économiques de l'Afrique Centrale.
+      </p>
+    </div>
+
+    <div class="venue-grid">
+      <div class="venue-infos">
+        <div class="venue-info-item reveal-up" *ngFor="let info of infos">
+          <span class="info-icon" [innerHTML]="getIconSvg(info.icon)"></span>
+          <div>
+            <span class="info-label">{{ info.label }}</span>
+            <span class="info-value">{{ info.value }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="venue-map-placeholder reveal-fade">
+        <!-- Google Maps intégrée pour l'Hôtel Platinum Cocotiers -->
+        <div class="map-card">
+          <div class="map-visual">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.909981829357!2d9.680658375874131!3d4.038791247038201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x106113f4a7e9add7%3A0xd5262f6c2bc2fecb!2sPlatinum%20Cocotiers%20H%C3%B4tel!5e0!3m2!1sfr!2scm!4v1781843766683!5m2!1sfr!2scm"
+              class="google-map"
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Localisation Hôtel Platinum Cocotiers Douala">
+            </iframe>
+          </div>
+          <div class="map-footer">
+            <span [innerHTML]="getIconSvg('map-pin')"></span> 
+            <span class="location-text">Hôtel Platinum Cocotiers, Douala</span>
+            <a href="https://maps.google.com/?q=Platinum+Cocotiers+Hôtel,Douala,Cameroun&ll=4.038791,9.680658" 
+               target="_blank" 
+               rel="noopener" 
+               class="btn-outline map-btn">
+              Ouvrir dans Maps ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

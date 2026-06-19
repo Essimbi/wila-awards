@@ -1,0 +1,37 @@
+<section class="sponsors-section" id="sponsors">
+  <div class="container">
+    <div class="sponsors-header">
+      <span class="section-eyebrow reveal-fade">Sponsors & Partenaires</span>
+      <h2 class="section-title reveal-up">Ils Soutiennent <span class="accent">WILA Awards</span></h2>
+      <div class="gold-divider reveal-fade"></div>
+      <p class="section-body reveal-up">
+        Les WILA Awards réunissent les acteurs qui croient en un écosystème logistique
+        africain plus inclusif, plus innovant et à l'image de toutes ses forces vives.
+      </p>
+    </div>
+
+    <div class="tiers-wrap">
+      <div class="tier-block reveal-up" *ngFor="let tier of tiers" [class]="tier.colorClass">
+        <h3 class="tier-name">{{ tier.name }}</h3>
+        <div class="logos-row">
+          <div class="logo-placeholder" *ngFor="let _ of [].constructor(tier.count)">
+            <span class="ph-label">Votre logo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sponsors-contact reveal-up">
+      <div class="contact-card">
+        <div class="contact-icon">✉</div>
+        <div>
+          <h4>Devenir partenaire</h4>
+          <p>Rejoignez les sponsors des WILA Awards 2026 et associez votre marque à cet événement historique pour la logistique africaine.</p>
+          <a href="mailto:contact@wila-awards.com" class="btn-outline" style="margin-top:1rem; display:inline-flex">
+            Contacter l'organisation
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

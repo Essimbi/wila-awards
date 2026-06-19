@@ -1,0 +1,123 @@
+<section class="theme-section" id="theme">
+  <!-- Arrière-plan avec particules animées -->
+  <div class="theme-bg-particles" aria-hidden="true">
+    <div class="particle" *ngFor="let p of particles" 
+         [style.left.%]="p.x" 
+         [style.top.%]="p.y"
+         [style.animation-delay.s]="p.delay">
+    </div>
+  </div>
+
+  <!-- Éléments géométriques décoratifs -->
+  <div class="theme-bg-geometry" aria-hidden="true">
+    <div class="geometry-ring ring-1"></div>
+    <div class="geometry-ring ring-2"></div>
+    <div class="geometry-ring ring-3"></div>
+    <div class="geometry-triangle triangle-1"></div>
+    <div class="geometry-triangle triangle-2"></div>
+    <div class="geometry-dot dot-1"></div>
+    <div class="geometry-dot dot-2"></div>
+    <div class="geometry-dot dot-3"></div>
+  </div>
+
+  <div class="container">
+    <!-- Barre de progression de lecture -->
+    <div class="scroll-progress-bar" aria-hidden="true">
+      <div class="progress-fill"></div>
+    </div>
+
+    <!-- Header amélioré avec layout moderne -->
+    <div class="theme-header">
+      <div class="theme-header-content">
+        <div class="theme-header-text">
+        <div class="theme-badge-year">
+          <span class="year-number">2026</span>
+          <span class="year-label">Première Édition</span>
+        </div>
+          
+          <span class="section-eyebrow theme-eyebrow">Thème de l'Édition</span>
+          <h2 class="section-title theme-title">
+            <span class="title-line">Femmes Leaders</span>
+            <span class="title-line">dans la Supply Chain</span>
+            <span class="title-line accent-line">Africaine</span>
+          </h2>
+          
+          <div class="theme-subtitle">
+            <p>Une célébration historique de l'excellence féminine</p>
+          </div>
+          
+          <div class="gold-divider"></div>
+          
+          <p class="section-body theme-body">
+            La première édition des WILA Awards célèbre les femmes qui, à travers le continent,
+            transforment la logistique, le transport, la distribution et la supply chain
+            par l'innovation et un leadership visionnaire. Une soirée gala qui marque l'histoire
+            de la profession en Afrique.
+          </p>
+          
+          <div class="theme-cta">
+            <a href="#reservation" class="btn-primary theme-btn">
+              <span>Réserver ma place</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <div class="theme-header-visual">
+          <div class="theme-visual-frame">
+            <img src="/assets/theme.png" alt="Thème 2026" class="theme-img">
+            <div class="visual-glow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats améliorées avec animations -->
+    <div class="theme-stats-section">
+      <h3 class="stats-title">L'Événement en Chiffres</h3>
+      <div class="theme-stats-grid">
+        <div class="stat-card" *ngFor="let stat of stats; let i = index" 
+             [style.animation-delay.ms]="i * 150">
+          <div class="stat-icon">
+            <div [innerHTML]="getIconSvg(stat.icon)"></div>
+          </div>
+          <div class="stat-content">
+            <span class="stat-number" [attr.data-count]="stat.number">{{ stat.display }}</span>
+            <span class="stat-label">{{ stat.label }}</span>
+            <span class="stat-desc">{{ stat.desc }}</span>
+          </div>
+          <div class="stat-decoration"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Piliers redessinés avec layout moderne -->
+    <div class="theme-pillars-section">
+      <div class="pillars-header">
+        <h3 class="pillars-title">Les Piliers de WILA</h3>
+        <p class="pillars-subtitle">Quatre valeurs fondamentales qui guident notre mission</p>
+      </div>
+      
+      <div class="theme-pillars-grid">
+        <div class="theme-pillar" 
+             *ngFor="let p of pillars; let i = index"
+             [style.animation-delay.ms]="i * 120"
+             (mouseenter)="onPillarHover(i, true)"
+             (mouseleave)="onPillarHover(i, false)">
+          <div class="pillar-decoration"></div>
+          <div class="pillar-icon-wrapper">
+            <div class="pillar-icon" [innerHTML]="getIconSvg(p.icon)"></div>
+            <div class="pillar-icon-bg"></div>
+          </div>
+          <div class="pillar-content">
+            <h4 class="pillar-title">{{ p.title }}</h4>
+            <p class="pillar-desc">{{ p.desc }}</p>
+          </div>
+          <div class="pillar-number">0{{ i + 1 }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
