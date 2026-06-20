@@ -5,13 +5,38 @@
       <h2 class="section-title reveal-up">Les Prix <span class="accent">WILA Awards</span></h2>
       <div class="gold-divider reveal-fade"></div>
       <p class="section-body reveal-up">
-        Six catégories pour honorer l'excellence sous toutes ses formes,
+        Quinze prix prestigieux répartis en catégories entreprises, individuelles et spéciales pour honorer l'excellence sous toutes ses formes,
         sélectionnées par un jury panafricain d'experts reconnus dans l'écosystème logistique.
       </p>
     </div>
 
+    <h3 class="category-group-title">Catégories Entreprises</h3>
     <div class="categories-grid">
-      <div class="cat-card reveal-up" *ngFor="let cat of categories">
+      <div class="cat-card reveal-up" *ngFor="let cat of categoriesEntreprises">
+        <div class="cat-icon" [innerHTML]="getIconSvg(cat.icon)"></div>
+        <div class="cat-content">
+          <h3 class="cat-label">{{ cat.label }}</h3>
+          <p class="cat-desc">{{ cat.desc }}</p>
+        </div>
+        <div class="cat-glow" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <h3 class="category-group-title">Catégories Individuelles</h3>
+    <div class="categories-grid">
+      <div class="cat-card reveal-up" *ngFor="let cat of categoriesIndividuelles">
+        <div class="cat-icon" [innerHTML]="getIconSvg(cat.icon)"></div>
+        <div class="cat-content">
+          <h3 class="cat-label">{{ cat.label }}</h3>
+          <p class="cat-desc">{{ cat.desc }}</p>
+        </div>
+        <div class="cat-glow" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <h3 class="category-group-title">Prix Spéciaux</h3>
+    <div class="categories-grid special-grid">
+      <div class="cat-card special-card reveal-up" *ngFor="let cat of prixSpeciaux">
         <div class="cat-icon" [innerHTML]="getIconSvg(cat.icon)"></div>
         <div class="cat-content">
           <h3 class="cat-label">{{ cat.label }}</h3>

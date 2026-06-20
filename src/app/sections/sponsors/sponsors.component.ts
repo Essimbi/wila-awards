@@ -10,33 +10,21 @@ import { ScrollAnimationService } from '../../core/services/scroll-animation.ser
   styleUrls: ['./sponsors.component.scss']
 })
 export class SponsorsComponent implements AfterViewInit {
-  tiers = [
-    {
-      name: 'Sponsors Platine',
-      colorClass: 'tier-platinum',
-      count: 3,
-    },
-    {
-      name: 'Sponsors Or',
-      colorClass: 'tier-gold',
-      count: 4,
-    },
-    {
-      name: 'Partenaires Médias',
-      colorClass: 'tier-media',
-      count: 5,
-    },
-    {
-      name: 'Partenaires Institutionnels',
-      colorClass: 'tier-inst',
-      count: 4,
-    },
+  partners = [
+    { name: '3CM Communications & Technologies', logo: '/assets/partners/3cm_communications_et_technologies.jpeg' },
+    { name: 'Balafon Media', logo: '/assets/partners/balafon_media.jpg' },
+    { name: 'Ministère de la Promotion de la Femme et de la Famille', logo: '/assets/partners/minister_de_la_formation_professionnelle_dej_la_femme_et_de_la_famille.png' },
+    { name: 'Ministère des Postes et Télécommunications', logo: '/assets/partners/ministere_des_posts_et_telecom.jpeg' },
+    { name: 'Ministère des Transports', logo: '/assets/partners/ministere_des_transport.jpg' },
+    { name: 'Port Autonome de Douala', logo: '/assets/partners/port_autonome_de_douala.png' },
+    { name: 'Projecteur Magazine', logo: '/assets/partners/projecteur_magazine.png' },
+    { name: 'Platinum Cocotiers Hôtel', logo: '/assets/partners/platinum_cocotiers_hotel.jpg' }
   ];
 
   constructor(private sa: ScrollAnimationService) {}
   ngAfterViewInit(): void {
     this.sa.initReveal('.sponsors-header > *', { y: 0, opacity: 1, stagger: 0.12 });
-    this.sa.initReveal('.tier-block', { y: 0, opacity: 1, stagger: 0.15, start: 'top 80%' });
+    this.sa.initReveal('.partner-card', { y: 0, opacity: 1, stagger: 0.1, start: 'top 80%' });
     this.sa.initReveal('.sponsors-contact', { y: 0, opacity: 1, start: 'top 85%' });
   }
 }

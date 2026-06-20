@@ -10,14 +10,12 @@
       </p>
     </div>
 
-    <div class="tiers-wrap">
-      <div class="tier-block reveal-up" *ngFor="let tier of tiers" [class]="tier.colorClass">
-        <h3 class="tier-name">{{ tier.name }}</h3>
-        <div class="logos-row">
-          <div class="logo-placeholder" *ngFor="let _ of [].constructor(tier.count)">
-            <span class="ph-label">Votre logo</span>
-          </div>
+    <div class="partners-grid">
+      <div class="partner-card reveal-up" *ngFor="let partner of partners">
+        <div class="partner-logo-wrap">
+          <img [src]="partner.logo" [alt]="partner.name" class="partner-logo" loading="lazy" />
         </div>
+        <span class="partner-name">{{ partner.name }}</span>
       </div>
     </div>
 
@@ -26,7 +24,7 @@
         <div class="contact-icon">✉</div>
         <div>
           <h4>Devenir partenaire</h4>
-          <p>Rejoignez les sponsors des WILA Awards 2026 et associez votre marque à cet événement historique pour la logistique africaine.</p>
+          <p>Rejoignez les partenaires des WILA Awards 2026 Édition Cameroun et associez votre marque à cet événement historique.</p>
           <a href="mailto:contact&#64;wila-awards.com" class="btn-outline" style="margin-top:1rem; display:inline-flex">
             Contacter l'organisation
           </a>

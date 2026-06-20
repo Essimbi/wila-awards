@@ -19,27 +19,27 @@ export class ThemeComponent implements AfterViewInit {
       number: 200, 
       display: '200+', 
       label: 'Invités Prestigieux', 
-      desc: 'Leaders et décideuses de toute l\'Afrique' 
+      desc: 'Leaders et décideuses à travers le Cameroun' 
     },
     { 
       icon: 'globe', 
-      number: 25, 
-      display: '25+', 
-      label: 'Pays Représentés', 
-      desc: 'Une couverture panafricaine inédite' 
+      number: 10, 
+      display: '10', 
+      label: 'Régions Couvertes', 
+      desc: 'L\'excellence sur tout le territoire camerounais' 
     },
     { 
       icon: 'award', 
-      number: 6, 
-      display: '6', 
-      label: 'Catégories de Prix', 
-      desc: 'Célébrant tous les aspects du leadership' 
+      number: 15, 
+      display: '15', 
+      label: 'Prix Décernés', 
+      desc: '7 entreprises · 5 individuels · 3 spéciaux' 
     },
     { 
       icon: 'star', 
       number: 1, 
       display: '1ère', 
-      label: 'Édition Historique', 
+      label: 'Édition Cameroun', 
       desc: 'Le début d\'une tradition d\'excellence' 
     }
   ];
@@ -57,8 +57,8 @@ export class ThemeComponent implements AfterViewInit {
     },
     { 
       icon: 'globe', 
-      title: 'Impact Continental', 
-      desc: 'Des lauréates de 25+ pays, incarnant la vision d\'une supply chain africaine intégrée et performante.' 
+      title: 'Impact National', 
+      desc: 'Des lauréates de toutes les régions, incarnant la vision d\'une supply chain camerounaise intégrée et performante.' 
     },
     { 
       icon: 'users', 
@@ -379,8 +379,6 @@ export class ThemeComponent implements AfterViewInit {
         
         // Mise à jour du texte avec formatage
         if (selector.includes(':nth-child(1)')) {
-          element.textContent = `${currentValue}+`;
-        } else if (selector.includes(':nth-child(2)')) {
           element.textContent = `${currentValue}+`;
         } else if (selector.includes(':nth-child(4)')) {
           element.textContent = `${currentValue}ère`;

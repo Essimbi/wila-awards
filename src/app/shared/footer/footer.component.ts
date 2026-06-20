@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   <div class="footer-inner container">
     <div class="footer-brand">
       <img src="/logo_wila.png" alt="WILA Awards 2026" class="footer-logo">
-      <p>1ère Édition · 03 Juillet 2026 · Douala, Cameroun</p>
+      <p>1ère Édition Cameroun · 03 Juillet 2026 · Douala, Cameroun</p>
     </div>
     <div class="footer-links">
       <a (click)="scrollTo('theme')">Thème</a>
@@ -25,7 +25,7 @@ import { CommonModule } from '@angular/common';
       <a (click)="scrollTo('reservation')">Réservation</a>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Women in Logistics Africa · Tous droits réservés</p>
+      <p>© 2026 WILA Awards Édition Cameroun · Tous droits réservés</p>
       <p class="footer-org">Organisé par WILA Cameroun</p>
     </div>
   </div>

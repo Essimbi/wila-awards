@@ -25,7 +25,7 @@
         <div class="prog-dot" [innerHTML]="getIconSvg(item.icon)"></div>
         <div class="prog-content">
           <h3 class="prog-title">{{ item.title }}</h3>
-          <p class="prog-desc">{{ item.desc }}</p>
+          <div class="prog-desc" [innerHTML]="item.desc"></div>
         </div>
       </div>
     </div>

@@ -13,12 +13,12 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class ProgrammeComponent implements AfterViewInit {
   timeline = [
     { time: '18h00', icon: 'door-open', title: 'Accueil & Cocktail de bienvenue', desc: 'Arrivée des invités, cocktail dînatoire, séances photos et networking.' },
-    { time: '18h45', icon: 'mic', title: 'Cérémonie d\'ouverture officielle', desc: 'Discours de la Présidente de WILA, mot des partenaires institutionnels.' },
-    { time: '19h15', icon: 'masks', title: 'Intermède culturel', desc: 'Performance artistique célébrant la femme africaine dans le monde professionnel.' },
-    { time: '19h30', icon: 'award', title: 'Remise des WILA Awards', desc: 'Présentation des nominées, témoignages, remise des trophées par catégorie.' },
-    { time: '21h00', icon: 'utensils', title: 'Dîner de gala', desc: 'Dîner officiel avec animation, échanges et réseautage entre participants.' },
-    { time: '22h00', icon: 'music', title: 'Soirée musicale & Networking', desc: 'Clôture musicale, séances photos officielles, échanges libres entre invités.' },
-    { time: '23h00', icon: 'star', title: 'Fin de la cérémonie', desc: 'Clôture officielle de la 1ère édition des WILA Awards 2026.' },
+    { time: '19h00', icon: 'mic', title: 'Ouverture Officielle', desc: 'Prises de parole :<br>• Mot de bienvenue – Présidente de WILA Cameroun<br>• Mot du Gouverneur de la Région du Littoral<br>• Discours – Ministre de la Femme et de la Famille<br>• Discours du Parrain Officiel – Ministre des Transports<br>• Présentation des WILA Awards – Objectifs et enjeux' },
+    { time: '19h30', icon: 'users', title: 'Conférence Thématique', desc: 'Thème : <em>"L’impact du Leadership Féminin sur la Transformation de la Supply Chain Africaine"</em>' },
+    { time: '20h15', icon: 'award', title: 'Remise des WILA Awards', desc: 'Remise des trophées par des personnalités influentes et discours des lauréates.' },
+    { time: '21h45', icon: 'package', title: 'Tombola & Remise de lots', desc: 'Tirage au sort et distribution des cadeaux spéciaux.' },
+    { time: '22h00', icon: 'utensils', title: 'Dîner de Gala & Clôture', desc: 'Dîner officiel, célébration et échanges libres.' },
+    { time: '23h00', icon: 'star', title: 'Fin Officielle de l\'Événement', desc: 'Clôture de la 1ère Édition Cameroun des WILA Awards 2026.' },
   ];
 
   constructor(private sa: ScrollAnimationService, private sanitizer: DomSanitizer) {}
@@ -37,7 +37,9 @@ export class ProgrammeComponent implements AfterViewInit {
       'award': `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>`,
       'utensils': `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>`,
       'music': `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`,
-      'star': `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
+      'star': `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+      'users': `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+      'package': `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22v-9"/></svg>`
     };
     return this.sanitizer.bypassSecurityTrustHtml(icons[iconName] || '');
   }
