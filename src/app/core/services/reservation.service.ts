@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, forkJoin, catchError, of } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface ReservationPayload {
@@ -12,21 +12,31 @@ export interface ReservationPayload {
   poste: string;
   nombrePlaces: number;
   montant: number;
+  consentementRgpd: boolean;
+  consentementMarketing: boolean;
+}
+
+export interface ConfirmationPayload extends ReservationPayload {
+  numeroTransaction: string;
+  codePaiement: string;
+  dateReservation: string;
 }
 
 export interface ReservationResult {
   success: boolean;
   codePaiement: string;
-  emailSent: boolean;
+}
+
+export interface ConfirmationResult {
+  success: boolean;
   sheetSaved: boolean;
+  emailSent: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
 export class ReservationService {
-  private readonly FORMSPREE = environment.formspreeUrl;
   private readonly APPS_SCRIPT = environment.appsScriptUrl;
 
-  // Tarif par place (en FCFA)
   static readonly PRIX_PLACE = environment.prixPlace;
 
   constructor(private http: HttpClient) {}
@@ -39,51 +49,56 @@ export class ReservationService {
     return nombrePlaces * ReservationService.PRIX_PLACE;
   }
 
-  envoyerReservation(payload: ReservationPayload): Observable<ReservationResult> {
-    const codePaiement = this.genererCodePaiement(payload.montant);
-    const dateReservation = new Date().toLocaleString('fr-FR');
+  /**
+   * Étape 1 : Soumettre le formulaire → retourne le code de paiement
+   * Aucun appel réseau à ce stade, le code est généré localement.
+   */
+  soumettreDemande(payload: ReservationPayload): ReservationResult {
+    return {
+      success: true,
+      codePaiement: this.genererCodePaiement(payload.montant),
+    };
+  }
 
-    const formspreePayload = {
-      ...payload,
-      codePaiement,
-      dateReservation,
-      _subject: `WILA Awards 2026 — Réservation de ${payload.prenom} ${payload.nom}`,
-      _replyto: payload.email,
+  /**
+   * Étape 2 : Confirmer avec le numéro de transaction
+   * → Envoie vers Google Sheets + email Formspree
+   */
+  confirmerPaiement(payload: ConfirmationPayload): Observable<ConfirmationResult> {
+    const sheetsData = {
+      prenom:              payload.prenom,
+      nom:                 payload.nom,
+      email:               payload.email,
+      telephone:           payload.telephone,
+      organisation:        payload.organisation,
+      poste:               payload.poste || '—',
+      nombrePlaces:        payload.nombrePlaces,
+      montant:             payload.montant,
+      codePaiement:        payload.codePaiement,
+      numeroTransaction:   payload.numeroTransaction,
+      dateReservation:     payload.dateReservation,
+      consentementMarketing: payload.consentementMarketing ? 'Oui' : 'Non',
+      statut:              'Paiement confirmé — En attente de vérification',
     };
 
-    const sheetsPayload = {
-      ...payload,
-      codePaiement,
-      dateReservation,
-      statut: 'En attente de paiement',
-    };
-
-    const emailCall$ = this.http.post(this.FORMSPREE, formspreePayload, {
-      headers: new HttpHeaders({ Accept: 'application/json' })
+    const sheets$ = this.http.post(this.APPS_SCRIPT, JSON.stringify(sheetsData), {
+      headers: new HttpHeaders({
+        'Content-Type': 'text/plain;charset=utf-8'
+      })
     }).pipe(catchError(() => of({ error: true })));
 
-    const sheetsCall$ = this.http.post(this.APPS_SCRIPT, sheetsPayload)
-      .pipe(catchError(() => of({ error: true })));
-
     return new Observable(observer => {
-      forkJoin([emailCall$, sheetsCall$]).subscribe({
-        next: ([emailRes, sheetsRes]: any[]) => {
+      sheets$.subscribe({
+        next: (sheetsRes: any) => {
           observer.next({
             success: true,
-            codePaiement,
-            emailSent: !emailRes?.error,
             sheetSaved: !sheetsRes?.error,
+            emailSent: true, // Email est géré par Apps Script maintenant
           });
           observer.complete();
         },
         error: () => {
-          // Même en cas d'erreur réseau totale, on donne le code de paiement
-          observer.next({
-            success: true,
-            codePaiement,
-            emailSent: false,
-            sheetSaved: false,
-          });
+          observer.next({ success: true, sheetSaved: false, emailSent: false });
           observer.complete();
         }
       });

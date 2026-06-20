@@ -864,3 +864,127 @@
     }
   }
 }
+// ─── Payment Step ─────────────────────────────────────────────
+.payment-step {
+  .payment-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+
+    .payment-header-icon {
+      flex-shrink: 0;
+      width: 52px; height: 52px;
+      background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--ivory); margin-bottom: 0.3rem; }
+    p  { font-size: 0.88rem; color: var(--ivory-dim); line-height: 1.5; }
+  }
+}
+
+// ─── Formulaire de transaction ───────────────────────────────
+.transaction-form {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.transaction-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.1em;
+    color: var(--ivory) !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.6rem;
+  }
+
+  input {
+    font-size: 1rem !important;
+    padding: 0.9rem 1.2rem !important;
+    border-color: rgba(212,175,55,0.2) !important;
+    letter-spacing: 0.05em;
+    &:focus { border-color: var(--gold) !important; }
+  }
+}
+
+.field-hint {
+  font-size: 0.78rem;
+  color: var(--ivory-dim);
+  margin-top: 0.5rem;
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+.transaction-actions {
+  display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+
+  .btn-back {
+    flex-shrink: 0; padding: 0.75rem 1.5rem; font-size: 0.88rem;
+    opacity: 0.8;
+    &:hover { opacity: 1; }
+  }
+  .btn-submit { flex: 1; min-width: 200px; }
+}
+
+// ─── Récapitulatif succès ────────────────────────────────────
+.success-summary {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(212,175,55,0.04);
+  border: 1px solid rgba(212,175,55,0.15);
+  border-radius: 4px;
+
+  h4 {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 1.5rem;
+  align-items: center;
+}
+
+.summary-key {
+  font-size: 0.78rem;
+  color: var(--ivory-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.summary-val {
+  font-size: 0.88rem;
+  color: var(--ivory);
+  font-weight: 500;
+  word-break: break-all;
+}
+
+code.summary-val {
+  font-family: 'Courier New', monospace;
+  color: var(--gold);
+  font-size: 0.9rem;
+}
+
+// ─── Responsive additions ────────────────────────────────────
+@media (max-width: 640px) {
+  .transaction-actions { flex-direction: column; .btn-back, .btn-submit { width: 100%; } }
+  .summary-grid { grid-template-columns: 1fr; gap: 0.2rem; }
+  .summary-key { margin-top: 0.6rem; }
+  .payment-step .payment-header { flex-direction: column; gap: 0.8rem; }
+}

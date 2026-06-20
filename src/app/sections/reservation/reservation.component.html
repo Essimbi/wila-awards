@@ -13,17 +13,19 @@
       <div class="gold-divider reveal-fade"></div>
       <p class="section-body reveal-up">
         200 places disponibles pour cette 1ère édition Cameroun.
-        La réservation est confirmée après paiement via le code USSD fourni.
+        La réservation est confirmée après paiement Mobile Money et saisie de votre numéro de transaction.
       </p>
     </div>
 
     <div class="resa-layout">
-      <!-- Formulaire / Étapes -->
       <div class="resa-form-wrap reveal-up">
 
-        <!-- ÉTAPE : Formulaire -->
+        <!-- ══════════════════════════════════════════════════════
+             ÉTAPE 1 : Formulaire de réservation
+        ══════════════════════════════════════════════════════ -->
         <div class="resa-step" *ngIf="step === 'form'">
           <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate autocomplete="off">
+
             <div class="form-row">
               <div class="form-group" [class.invalid]="isInvalid('prenom')">
                 <label for="prenom">Prénom *</label>
@@ -81,23 +83,22 @@
                 <span class="summary-total">{{ formatMontant(montant) }}</span>
               </div>
               <div class="summary-row note-row">
-                <span>Paiement hors-site via Mobile Money (MTN/Orange)</span>
+                <span>Paiement via Mobile Money (MTN / Orange) après soumission</span>
               </div>
             </div>
 
-            <!-- Clauses de consentement RGPD -->
+            <!-- Consentement RGPD -->
             <div class="consent-section">
               <h4 class="consent-title">Protection des données personnelles</h4>
-              
+
               <div class="consent-item" [class.invalid]="isInvalid('consentementRgpd')">
                 <label class="consent-checkbox">
                   <input type="checkbox" formControlName="consentementRgpd" required>
                   <span class="checkbox-custom"></span>
                   <span class="consent-text">
                     <strong>J'accepte la collecte et le traitement de mes données personnelles *</strong><br>
-                    <small>Conformément aux lois camerounaises sur la protection des données, WILA Cameroun collectera 
-                    vos informations (nom, email, téléphone) pour gérer votre réservation et vous contacter concernant 
-                    l'événement. Conservation : 3 ans après l'événement (fin 2029).</small>
+                    <small>Conformément aux lois camerounaises sur la protection des données, WILA Cameroun collectera
+                    vos informations pour gérer votre réservation. Conservation : 3 ans après l'événement.</small>
                   </span>
                 </label>
                 <span class="err-msg" *ngIf="isInvalid('consentementRgpd')">Consentement obligatoire</span>
@@ -112,59 +113,51 @@
                   </span>
                 </label>
               </div>
-
-              <div class="rgpd-info">
-                <p><strong>Vos droits selon la loi camerounaise :</strong> Accès, rectification, suppression de vos données. 
-                Contact : <a href="mailto:{{ contactEmail }}">{{ contactEmail }}</a><br>
-                <strong>Autorité de contrôle :</strong> ANTIC (Agence Nationale des Technologies de l'Information et de la Communication)</p>
-              </div>
             </div>
 
             <button type="submit" class="btn-primary btn-submit" [disabled]="form.invalid">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="20 6 9 17 4 12"/>
               </svg>
-              Valider ma réservation — {{ formatMontant(montant) }}
+              Continuer vers le paiement — {{ formatMontant(montant) }}
             </button>
           </form>
         </div>
 
-        <!-- ÉTAPE : Loading -->
-        <div class="resa-step loading-step" *ngIf="step === 'loading'">
-          <div class="loader-ring">
-            <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="var(--gold)" stroke-width="2" stroke-dasharray="180" stroke-dashoffset="0" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 40 40" to="360 40 40" dur="1.2s" repeatCount="indefinite"/></circle></svg>
-          </div>
-          <p>Envoi de votre réservation en cours…</p>
-        </div>
+        <!-- ══════════════════════════════════════════════════════
+             ÉTAPE 2 : Code de paiement + Numéro de transaction
+        ══════════════════════════════════════════════════════ -->
+        <div class="resa-step payment-step" *ngIf="step === 'payment'">
 
-        <!-- ÉTAPE : Succès / Code de paiement -->
-        <div class="resa-step success-step" *ngIf="step === 'success' && result">
-          <div class="success-header">
-            <div class="success-icon">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
-                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
+          <div class="payment-header">
+            <div class="payment-header-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
+                <rect width="20" height="14" x="2" y="5" rx="2"/>
+                <line x1="2" x2="22" y1="10" y2="10"/>
               </svg>
             </div>
-            <h3>Réservation enregistrée !</h3>
-            <p>Voici les instructions pour finaliser votre réservation par paiement Mobile Money.</p>
+            <div>
+              <h3>Effectuez votre paiement</h3>
+              <p>Composez le code USSD ci-dessous sur votre téléphone pour procéder au paiement.</p>
+            </div>
           </div>
 
+          <!-- Instructions paiement -->
           <div class="payment-instructions">
             <div class="payment-step-item">
               <span class="ps-num">1</span>
               <div>
-                <strong>Composez ce code sur votre téléphone</strong>
-                <p>Sur MTN ou Orange Money, entrez le code USSD suivant :</p>
+                <strong>Composez ce code USSD sur votre téléphone</strong>
+                <p>Disponible sur MTN Money et Orange Money :</p>
               </div>
             </div>
 
             <div class="ussd-code-block">
               <span class="ussd-label">Code de paiement</span>
-              <code class="ussd-code">{{ result.codePaiement }}</code>
+              <code class="ussd-code">{{ codePaiement }}</code>
               <div class="ussd-meta">
                 <span>Au nom de : <strong>{{ beneficiaryName }}</strong></span>
-                <span>Montant : <strong>{{ formatMontant(getMontantFromCode(result.codePaiement)) }}</strong></span>
+                <span>Montant : <strong>{{ formatMontant(montant) }}</strong></span>
               </div>
               <button id="copy-btn" class="btn-outline btn-copy" (click)="copyCode()">Copier le code</button>
             </div>
@@ -172,25 +165,94 @@
             <div class="payment-step-item">
               <span class="ps-num">2</span>
               <div>
-                <strong>Validez le paiement</strong>
-                <p>Suivez les instructions de votre opérateur pour confirmer le transfert.</p>
-              </div>
-            </div>
-
-            <div class="payment-step-item">
-              <span class="ps-num">3</span>
-              <div>
-                <strong>Envoyez le reçu</strong>
-                <p>Transmettez le reçu de paiement à l'organisation par WhatsApp ou email pour recevoir votre billet officiel.</p>
+                <strong>Notez votre numéro de transaction</strong>
+                <p>Après le paiement, votre opérateur vous enverra un SMS de confirmation avec un identifiant de transaction.</p>
               </div>
             </div>
           </div>
 
-          <div class="success-note" *ngIf="!result.emailSent || !result.sheetSaved">
+          <!-- Champ numéro de transaction -->
+          <form [formGroup]="confirmForm" (ngSubmit)="onConfirmer()" novalidate class="transaction-form">
+            <div class="form-group transaction-group" [class.invalid]="isConfirmInvalid()">
+              <label for="numeroTransaction">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                Numéro de transaction Mobile Money *
+              </label>
+              <input
+                id="numeroTransaction"
+                type="text"
+                formControlName="numeroTransaction"
+                placeholder="Ex : TXN2026XXXXXXXX"
+                autocomplete="off"
+              >
+              <span class="err-msg" *ngIf="isConfirmInvalid()">
+                Format invalide. Ex : RC260619.1326.C40583
+              </span>
+              <p class="field-hint">Trouvez ce numéro dans le SMS de confirmation envoyé par votre opérateur.</p>
+            </div>
+
+            <div class="transaction-actions">
+              <button type="button" class="btn-outline btn-back" (click)="retourFormulaire()">
+                ← Retour
+              </button>
+              <button type="submit" class="btn-primary btn-submit" [disabled]="confirmForm.invalid">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Confirmer ma réservation
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════
+             ÉTAPE 3 : Envoi en cours
+        ══════════════════════════════════════════════════════ -->
+        <div class="resa-step loading-step" *ngIf="step === 'confirming'">
+          <div class="loader-ring">
+            <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="var(--gold)" stroke-width="2" stroke-dasharray="180" stroke-dashoffset="0" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 40 40" to="360 40 40" dur="1.2s" repeatCount="indefinite"/></circle></svg>
+          </div>
+          <p>Enregistrement de votre réservation en cours…</p>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════
+             ÉTAPE 4 : Confirmation finale
+        ══════════════════════════════════════════════════════ -->
+        <div class="resa-step success-step" *ngIf="step === 'success'">
+          <div class="success-header">
+            <div class="success-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5">
+                <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <h3>Réservation confirmée !</h3>
+            <p>Votre réservation a bien été enregistrée. L'équipe WILA Awards vous contactera pour la validation finale de votre billet.</p>
+          </div>
+
+          <div class="success-summary">
+            <h4>Récapitulatif</h4>
+            <div class="summary-grid">
+              <span class="summary-key">Code de paiement</span>
+              <code class="summary-val">{{ codePaiement }}</code>
+              <span class="summary-key">N° de transaction</span>
+              <span class="summary-val">{{ confirmForm.get('numeroTransaction')?.value }}</span>
+              <span class="summary-key">Montant payé</span>
+              <span class="summary-val">{{ formatMontant(montant) }}</span>
+              <span class="summary-key">Date</span>
+              <span class="summary-val">{{ dateReservation }}</span>
+            </div>
+          </div>
+
+          <div class="success-note" *ngIf="confirmResult && (!confirmResult.sheetSaved || !confirmResult.emailSent)">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <span>Une connexion instable a pu affecter l'envoi de la confirmation. Votre code de paiement est valide. Conservez cette page.</span>
+            <span>Une connexion instable a pu affecter l'enregistrement. Conservez votre numéro de transaction et contactez-nous si nécessaire.</span>
           </div>
         </div>
+
       </div>
 
       <!-- Sidebar infos -->
@@ -200,8 +262,8 @@
           <ul>
             <li><strong>Prix :</strong> 25 000 FCFA / place</li>
             <li><strong>Capacité :</strong> 200 invités maximum</li>
-            <li><strong>Mode de paiement :</strong> Mobile Money (MTN / Orange)</li>
-            <li><strong>Confirmation :</strong> Billet envoyé après réception du reçu</li>
+            <li><strong>Paiement :</strong> Mobile Money (MTN / Orange)</li>
+            <li><strong>Confirmation :</strong> Après vérification du numéro de transaction</li>
           </ul>
         </div>
 

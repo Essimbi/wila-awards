@@ -1,14 +1,14 @@
 import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ReservationService, ReservationResult } from '../../core/services/reservation.service';
+import { ReservationService, ReservationPayload, ConfirmationResult } from '../../core/services/reservation.service';
 import { ScrollAnimationService } from '../../core/services/scroll-animation.service';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-type Step = 'form' | 'loading' | 'success';
+type Step = 'form' | 'payment' | 'confirming' | 'success';
 
 @Component({
   selector: 'app-reservation',
@@ -20,8 +20,21 @@ type Step = 'form' | 'loading' | 'success';
 export class ReservationComponent implements AfterViewInit, OnInit, OnDestroy {
   readonly Math = Math;
   step: Step = 'form';
+
+  // Formulaire principal
   form!: FormGroup;
-  result?: ReservationResult;
+
+  // Formulaire de confirmation (numéro de transaction)
+  confirmForm!: FormGroup;
+
+  // Résultat de la confirmation finale
+  confirmResult?: ConfirmationResult;
+
+  // Données de la réservation en cours (entre étape 1 et 2)
+  private pendingPayload?: ReservationPayload;
+  codePaiement = '';
+  dateReservation = '';
+
   readonly PRIX_PLACE = ReservationService.PRIX_PLACE;
   private destroy$ = new Subject<void>();
   montantCached = 0;
@@ -36,30 +49,33 @@ export class ReservationComponent implements AfterViewInit, OnInit, OnDestroy {
     private sanitizer: DomSanitizer
   ) {
     this.form = this.fb.group({
-      prenom:       ['', [Validators.required, Validators.minLength(2)]],
-      nom:          ['', [Validators.required, Validators.minLength(2)]],
-      email:        ['', [Validators.required, Validators.email]],
-      telephone:    ['', [Validators.required, Validators.pattern(/^(\+237|237)?\s?[6789]\d{8}$/)]],
-      organisation: ['', Validators.required],
-      poste:        [''],
-      nombrePlaces: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
-      consentementRgpd: [false, Validators.requiredTrue],
-      consentementMarketing: [false]
+      prenom:               ['', [Validators.required, Validators.minLength(2)]],
+      nom:                  ['', [Validators.required, Validators.minLength(2)]],
+      email:                ['', [Validators.required, Validators.email]],
+      telephone:            ['', [Validators.required, Validators.pattern(/^(\+237|237)?\s?[6789]\d{8}$/)]],
+      organisation:         ['', Validators.required],
+      poste:                [''],
+      nombrePlaces:         [1, [Validators.required, Validators.min(1), Validators.max(10)]],
+      consentementRgpd:     [false, Validators.requiredTrue],
+      consentementMarketing:[false]
+    });
+
+    this.confirmForm = this.fb.group({
+      numeroTransaction: ['', [
+        Validators.required, 
+        Validators.pattern(/^[a-zA-Z]{2}\d{6}\.\d{4}\.[a-zA-Z]\d{5}$/)
+      ]]
     });
   }
 
   ngOnInit(): void {
     this.form.get('nombrePlaces')?.valueChanges
-      .pipe(
-        debounceTime(100),
-        takeUntil(this.destroy$)
-      )
+      .pipe(debounceTime(100), takeUntil(this.destroy$))
       .subscribe(() => {
         this.montantCached = this.reservationSvc.calculerMontant(
           this.form.get('nombrePlaces')?.value || 1
         );
       });
-    // Set initial cache
     this.montantCached = this.montant;
   }
 
@@ -80,45 +96,68 @@ export class ReservationComponent implements AfterViewInit, OnInit, OnDestroy {
     );
   }
 
-  get codePaiementPreview(): string {
-    return this.reservationSvc.genererCodePaiement(this.montant);
-  }
-
   isInvalid(field: string): boolean {
     const ctrl = this.form.get(field);
     return !!(ctrl && ctrl.invalid && (ctrl.dirty || ctrl.touched));
   }
 
+  isConfirmInvalid(): boolean {
+    const ctrl = this.confirmForm.get('numeroTransaction');
+    return !!(ctrl && ctrl.invalid && (ctrl.dirty || ctrl.touched));
+  }
+
+  /** Étape 1 : soumission du formulaire → affichage du code USSD */
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-    this.step = 'loading';
-    const payload = {
+
+    this.pendingPayload = {
       ...this.form.value,
       montant: this.montant,
     };
-    this.reservationSvc.envoyerReservation(payload).subscribe({
+
+    const result = this.reservationSvc.soumettreDemande(this.pendingPayload!);
+    this.codePaiement = result.codePaiement;
+    this.dateReservation = new Date().toLocaleString('fr-FR');
+    this.step = 'payment';
+  }
+
+  /** Étape 2 : confirmation avec le numéro de transaction */
+  onConfirmer(): void {
+    if (this.confirmForm.invalid) {
+      this.confirmForm.markAllAsTouched();
+      return;
+    }
+
+    this.step = 'confirming';
+
+    const confirmPayload = {
+      ...this.pendingPayload!,
+      numeroTransaction: this.confirmForm.get('numeroTransaction')!.value.trim(),
+      codePaiement: this.codePaiement,
+      dateReservation: this.dateReservation,
+    };
+
+    this.reservationSvc.confirmerPaiement(confirmPayload).subscribe({
       next: (res) => {
-        this.result = res;
+        this.confirmResult = res;
         this.step = 'success';
       },
       error: () => {
-        this.result = {
-          success: true,
-          codePaiement: this.reservationSvc.genererCodePaiement(this.montant),
-          emailSent: false,
-          sheetSaved: false,
-        };
+        this.confirmResult = { success: true, sheetSaved: false, emailSent: false };
         this.step = 'success';
       }
     });
   }
 
-  getMontantFromCode(code: string): number {
-    const parts = code.replace(/#/g, '').split('*');
-    return +(parts[3] || '0');
+  /** Retour au formulaire depuis l'étape paiement */
+  retourFormulaire(): void {
+    this.step = 'form';
+    this.codePaiement = '';
+    this.pendingPayload = undefined;
+    this.confirmForm.reset();
   }
 
   formatMontant(n: number): string {
@@ -126,8 +165,8 @@ export class ReservationComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   copyCode(): void {
-    if (this.result?.codePaiement) {
-      navigator.clipboard.writeText(this.result.codePaiement).then(() => {
+    if (this.codePaiement) {
+      navigator.clipboard.writeText(this.codePaiement).then(() => {
         const btn = document.getElementById('copy-btn');
         if (btn) {
           btn.textContent = '✓ Copié !';
