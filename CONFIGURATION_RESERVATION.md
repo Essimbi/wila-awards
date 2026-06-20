@@ -24,7 +24,7 @@ Le système de réservation est **architecturalement complet** mais nécessite u
 
 **Étapes :**
 1. Créer un compte sur [formspree.io](https://formspree.io)
-2. Créer un formulaire avec email destinataire : `contact@wila-awards.com`
+2. Créer un formulaire avec email destinataire : `wilacameroun@gmail.com`
 3. Récupérer l'URL du endpoint : `https://formspree.io/f/YOUR_FORM_ID`
 4. Mettre à jour dans `src/environments/environment.ts` et `environment.prod.ts` :
 
@@ -103,7 +103,7 @@ export const environment = {
   prixPlace: 25000, // FCFA - À ajuster selon le tarif final
   eventDate: '2026-07-03T18:00:00',
   beneficiaryName: 'Blandine Flore Fobasso Tchoffo Epse Kochele',
-  contactEmail: 'contact@wila-awards.com', // Email réel WILA
+  contactEmail: 'wilacameroun@gmail.com', // Email réel WILA
   contactPhone: '237600000000', // Téléphone réel WILA
 };
 ```
