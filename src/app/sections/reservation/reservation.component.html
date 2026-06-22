@@ -188,8 +188,11 @@
                 placeholder="Ex : TXN2026XXXXXXXX"
                 autocomplete="off"
               >
-              <span class="err-msg" *ngIf="isConfirmInvalid()">
+              <span class="err-msg" *ngIf="isConfirmInvalid() && !isExampleError()">
                 Format invalide. Ex : RC260619.1326.C40583
+              </span>
+              <span class="err-msg" *ngIf="isExampleError()">
+                Veuillez saisir votre propre numéro de transaction, pas l'exemple !
               </span>
               <p class="field-hint">Trouvez ce numéro dans le SMS de confirmation envoyé par votre opérateur.</p>
             </div>
@@ -230,7 +233,11 @@
               </svg>
             </div>
             <h3>Réservation confirmée !</h3>
-            <p>Votre réservation a bien été enregistrée. L'équipe WILA Awards vous contactera pour la validation finale de votre billet.</p>
+            <p>
+              Votre réservation a été enregistrée avec succès ! Un billet d'attente vous a été envoyé par email 
+              <em>(pensez à vérifier vos courriers indésirables / spams)</em>. 
+              L'équipe WILA Awards procédera à la validation définitive de votre paiement dans les plus brefs délais.
+            </p>
           </div>
 
           <div class="success-summary">

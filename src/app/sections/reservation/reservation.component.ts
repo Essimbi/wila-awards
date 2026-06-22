@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ReservationService, ReservationPayload, ConfirmationResult } from '../../core/services/reservation.service';
 import { ScrollAnimationService } from '../../core/services/scroll-animation.service';
 import { Subject } from 'rxjs';
@@ -63,7 +63,11 @@ export class ReservationComponent implements AfterViewInit, OnInit, OnDestroy {
     this.confirmForm = this.fb.group({
       numeroTransaction: ['', [
         Validators.required, 
-        Validators.pattern(/^[a-zA-Z]{2}\d{6}\.\d{4}\.[a-zA-Z]\d{5}$/)
+        Validators.pattern(/^\s*[a-zA-Z]{2}\d{6}\.\d{4}\.[a-zA-Z]\d{5}\s*$/),
+        (control: AbstractControl) => {
+          const val = (control.value || '').trim();
+          return val === 'RC260619.1326.C40583' ? { isExample: true } : null;
+        }
       ]]
     });
   }
@@ -104,6 +108,11 @@ export class ReservationComponent implements AfterViewInit, OnInit, OnDestroy {
   isConfirmInvalid(): boolean {
     const ctrl = this.confirmForm.get('numeroTransaction');
     return !!(ctrl && ctrl.invalid && (ctrl.dirty || ctrl.touched));
+  }
+
+  isExampleError(): boolean {
+    const ctrl = this.confirmForm.get('numeroTransaction');
+    return !!(ctrl && ctrl.hasError('isExample') && (ctrl.dirty || ctrl.touched));
   }
 
   /** Étape 1 : soumission du formulaire → affichage du code USSD */
