@@ -14,6 +14,7 @@ export class ProgrammeComponent implements AfterViewInit {
   timeline = [
     { time: '18h00', icon: 'door-open', title: 'Accueil & Cocktail de bienvenue', desc: 'Arrivée des invités, cocktail dînatoire, séances photos et networking.' },
     { time: '19h00', icon: 'mic', title: 'Ouverture Officielle', desc: 'Prises de parole :<br>• Mot de bienvenue – Présidente de WILA Cameroun<br>• Mot du Gouverneur de la Région du Littoral<br>• Discours – Ministre de la Femme et de la Famille<br>• Discours du Parrain Officiel – Ministre des Transports<br>• Présentation des WILA Awards – Objectifs et enjeux' },
+    { time: '', icon:'mic', title: 'Discours de la marraine'},
     { time: '19h30', icon: 'users', title: 'Conférence Thématique', desc: 'Thème : <em>"L’impact du Leadership Féminin sur la Transformation de la Supply Chain Africaine"</em>' },
     { time: '20h15', icon: 'award', title: 'Remise des WILA Awards', desc: 'Remise des trophées par des personnalités influentes et discours des lauréates.' },
     { time: '21h45', icon: 'package', title: 'Tombola & Remise de lots', desc: 'Tirage au sort et distribution des cadeaux spéciaux.' },
