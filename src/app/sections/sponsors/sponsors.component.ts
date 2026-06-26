@@ -18,7 +18,8 @@ export class SponsorsComponent implements AfterViewInit {
     { name: 'Ministère des Transports', logo: '/assets/partners/ministere_des_transport.jpg' },
     { name: 'Port Autonome de Douala', logo: '/assets/partners/port_autonome_de_douala.png' },
     { name: 'Projecteur Magazine', logo: '/assets/partners/projecteur_magazine.png' },
-    { name: 'Platinum Cocotiers Hôtel', logo: '/assets/partners/platinum_cocotiers_hotel.jpg' }
+    { name: 'Platinum Cocotiers Hôtel', logo: '/assets/partners/platinum_cocotiers_hotel.jpg' },
+    { name: 'Terminal Bois du Port de Douala', logo: '/assets/partners/terminal_bois_du_port_de_douala.png' }
   ];
 
   constructor(private sa: ScrollAnimationService) {}
