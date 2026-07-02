@@ -23,8 +23,8 @@ export class SponsorsComponent implements AfterViewInit {
     { name: '3CM Communications & Technologies', logo: '/assets/partners/3cm_communications_et_technologies.jpeg' },
     { name: 'Balafon TV', logo: '/assets/partners/balafon_tv.jpeg' },
     { name: 'Projecteur Magazine', logo: '/assets/partners/projecteur_magazine.png' },
-    // { name: 'Ministère des Transports', logo: '/assets/partners/ministere_des_transport.jpg' },
     { name: 'Platinum Cocotiers Hôtel', logo: '/assets/partners/platinum_cocotiers_hotel.jpg' },
+    { name: 'Ecobank', logo: '/assets/partners/ecobank.jpeg' },
   ];
 
   constructor(private sa: ScrollAnimationService) {}
